@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = 'BottomSelectView'
-    s.version      = '1.0.2'
+    s.version      = '1.0.3'
     s.summary      = 'A simple bottom pop-up view in Swift'
     s.homepage     = 'https://github.com/Jiexiang617/BottomSelectView'
     s.license      = 'MIT'
