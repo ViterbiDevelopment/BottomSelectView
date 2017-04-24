@@ -20,8 +20,13 @@ private let CellCount: CGFloat = 4
 private let DefaultFont = UIFont.systemFont(ofSize: 16)
 
 public struct SelectViewInfo {
-    var title: String
-    var color: UIColor?
+    public var title: String
+    public var color: UIColor?
+    
+    public init(title: String, color: UIColor?) {
+        self.title = title
+        self.color = color
+    }
 }
 
 open class BottomSelectView: UIView {
@@ -54,11 +59,11 @@ open class BottomSelectView: UIView {
         setupView()
     }
     
-    class func show(title: String?, options: [SelectViewInfo], cancelTitle: SelectViewInfo?, selectCallBack: ((_ index: Int) -> Swift.Void)?) {
+    class open func show(title: String?, options: [SelectViewInfo], cancelTitle: SelectViewInfo?, selectCallBack: ((_ index: Int) -> Swift.Void)?) {
         BottomSelectView(title: title, options: options, cancelTitle: cancelTitle, selectCallBack: selectCallBack, cancelCallBack: nil).showSelectView()
     }
     
-    class func show(title: String?, options: [SelectViewInfo], cancelTitle: SelectViewInfo?, selectCallBack: ((_ index: Int) -> Swift.Void)?, cancelCallBack: (() -> Swift.Void)?) {
+    class open func show(title: String?, options: [SelectViewInfo], cancelTitle: SelectViewInfo?, selectCallBack: ((_ index: Int) -> Swift.Void)?, cancelCallBack: (() -> Swift.Void)?) {
         BottomSelectView(title: title, options: options, cancelTitle: cancelTitle, selectCallBack: selectCallBack, cancelCallBack: cancelCallBack).showSelectView()
     }
     
@@ -102,7 +107,8 @@ private extension BottomSelectView {
         let tableViewY = titleLabel == nil ? 0 : DefaultHeight
         let optionTableViewF = CGRect(x: 0, y: tableViewY, width: frame.width, height: CGFloat(tableViewH))
         optionTableView = UITableView(frame: optionTableViewF, style: .grouped)
-        optionTableView.register(UINib(nibName: "BottomSelectCell", bundle: nil), forCellReuseIdentifier: "BottomSelectCell")
+        let nib = UINib(nibName: "BottomSelectCell", bundle: Bundle(for: BottomSelectView.self))
+        optionTableView.register(nib, forCellReuseIdentifier: "BottomSelectCell")
         optionTableView.showsVerticalScrollIndicator = false
         optionTableView.showsHorizontalScrollIndicator = false
         optionTableView.dataSource = self
@@ -124,7 +130,7 @@ private extension BottomSelectView {
     
     func showSelectView() {
         UIApplication.shared.keyWindow?.addSubview(self)
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.7, options: .curveEaseInOut, animations: { 
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.7, options: .curveEaseInOut, animations: {
             self.coverView.alpha = 1.0
             self.contentView.transform = CGAffineTransform(translationX: 0, y: -self.contentView.bounds.height)
         }, completion: nil)
@@ -156,7 +162,7 @@ extension BottomSelectView: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
-
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
     }
