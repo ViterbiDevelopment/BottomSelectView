@@ -106,7 +106,7 @@ private extension BottomSelectView {
         // 设置选项列表
         let tableViewY = titleLabel == nil ? 0 : DefaultHeight
         let optionTableViewF = CGRect(x: 0, y: tableViewY, width: frame.width, height: CGFloat(tableViewH))
-        optionTableView = UITableView(frame: optionTableViewF, style: .grouped)
+        optionTableView = UITableView(frame: optionTableViewF, style: .plain)
         let nib = UINib(nibName: "BottomSelectCell", bundle: Bundle(for: BottomSelectView.self))
         optionTableView.register(nib, forCellReuseIdentifier: "BottomSelectCell")
         optionTableView.showsVerticalScrollIndicator = false
@@ -155,13 +155,13 @@ private extension BottomSelectView {
 
 extension BottomSelectView: UITableViewDataSource {
     
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.01
-    }
-    
-    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.01
-    }
+//    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 0.01
+//    }
+//    
+//    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 0.01
+//    }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
