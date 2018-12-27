@@ -19,7 +19,7 @@ private let CellCount: CGFloat = 4
 // 默认字体
 private let DefaultFont = UIFont.systemFont(ofSize: 16)
 
-public struct SelectViewInfo {
+public class SelectViewInfo: NSObject {
     public var title: String
     public var color: UIColor?
     
